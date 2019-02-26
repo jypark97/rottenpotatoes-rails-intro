@@ -10,9 +10,9 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-  def index
-    @movies = Movie.all
-  end
+  # def index
+  #   @movies = Movie.all
+  # end
 
   def new
     # default: render 'new' template
@@ -43,12 +43,12 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.find(:all, :order => params[:sort_by])
-    if params[:sort_by] == 'title'
+    @movies = Movie.all(:order => "title ASC, release_date ASC")
+   if params[:sort_by] == 'title'
       @title_header = 'hilite'
     elsif params[:sort_by] == 'release_date'
       @release_header ='hilite'
-    end
-  end
+   end
+ end
 
 end
