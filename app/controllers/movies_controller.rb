@@ -42,14 +42,13 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
-  def sort_date
-    @movies = Movie.all.order("release_date")
-    redirect_to movies_path
-  end
-
-  def sort_name
-    @movies = Movie.all.order("title")
-    redirect_to movies_path
+  def index
+   @movies = Movie.all(:order => "title ASC, release_date ASC")
+   if params[:sort_by] == 'title'
+      @title_header = 'hilite'
+    elsif params[:sort_by] == 'release_date'
+      @release_header ='hilite'
+   end
   end
 
 end
