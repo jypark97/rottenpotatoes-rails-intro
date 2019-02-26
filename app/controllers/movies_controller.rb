@@ -10,9 +10,9 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-  def index
-    @movies = Movie.all
-  end
+  # def index
+  #   @movies = Movie.all
+  # end
 
   def new
     # default: render 'new' template
