@@ -16,16 +16,20 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.order(:rating).select(:rating).map(&:rating).uniq
     @checked_ratings = check
-    @checked_ratings.each do |rating|
+    session[:ratings] = @checked_ratings
+    session[:ratings].each do |rating|
       params[rating] = true
     end
-    @movies = Movie.all.order(params[:sort_by])
-   if params[:sort_by] == 'title'
+    if params[:sort_by]
+      session[:sort_by] = params[:sort_by]
+    end
+    @movies = Movie.all.order(session[:sort_by])
+   if session[:sort_by] == 'title'
       @title_header = 'hilite'
-    elsif params[:sort_by] == 'release_date'
+    elsif session[:sort_by] == 'release_date'
       @release_header ='hilite'
     else
-      @movies = Movie.where(:rating => @checked_ratings)
+      @movies = Movie.where(:rating => session[:ratings)
    end
   end
 
@@ -60,6 +64,8 @@ class MoviesController < ApplicationController
   def check
     if params[:ratings]
       params[:ratings].keys
+    elsif session[:ratings]
+      session[:ratings]
     else
       @all_ratings
     end
