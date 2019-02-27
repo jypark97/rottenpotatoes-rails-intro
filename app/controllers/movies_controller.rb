@@ -29,7 +29,7 @@ class MoviesController < ApplicationController
     elsif session[:sort_by] == 'release_date'
       @release_header ='hilite'
     else
-      @movies = Movie.where(:rating => session[:ratings)
+      @movies = Movie.where(:rating => session[:ratings])
    end
   end
 
