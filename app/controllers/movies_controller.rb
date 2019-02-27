@@ -10,9 +10,6 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-  # def index
-  #   @movies = Movie.all
-  # end
   def index
     @all_ratings = Movie.order(:rating).select(:rating).map(&:rating).uniq
     @checked_ratings = check
@@ -65,7 +62,7 @@ class MoviesController < ApplicationController
     elsif session[:ratings]
       session[:ratings]
     else
-      @all_ratings
+      return @all_ratings
     end
   end
 
