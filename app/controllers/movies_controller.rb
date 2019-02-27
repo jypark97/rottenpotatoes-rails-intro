@@ -14,6 +14,11 @@ class MoviesController < ApplicationController
   #   @movies = Movie.all
   # end
   def index
+    @all_ratings = Movie.order(:rating).select(:rating).map(&:rating).uniq
+    @checked_ratings = check
+    @checked_ratings.each do |rating|
+      params[rating] = true
+    end
     @movies = Movie.all.order(params[:sort_by])
    if params[:sort_by] == 'title'
       @title_header = 'hilite'
