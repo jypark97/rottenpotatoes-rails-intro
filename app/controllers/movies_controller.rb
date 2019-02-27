@@ -22,8 +22,6 @@ class MoviesController < ApplicationController
     end
     if params[:sort_by]
       session[:sort_by] = params[:sort_by]
-    elsif params[:sort_by].blank?
-      session.delete(:sort_by)
     end
     @movies = Movie.all.where(:rating => session[:ratings]).order(session[:sort_by])
    if session[:sort_by] == 'title'
