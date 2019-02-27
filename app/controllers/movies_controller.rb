@@ -24,6 +24,8 @@ class MoviesController < ApplicationController
       @title_header = 'hilite'
     elsif params[:sort_by] == 'release_date'
       @release_header ='hilite'
+    else
+      @movies = Movie.where(:rating => @checked_ratings)
    end
   end
 
@@ -53,6 +55,14 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
+  end
+
+  def check
+    if params[:ratings]
+      params[:ratings].keys
+    else
+      @all_ratings
+    end
   end
 
 end
