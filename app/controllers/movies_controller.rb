@@ -60,12 +60,12 @@ class MoviesController < ApplicationController
   end
 
   def check
-    if params[:ratings].blank?
-      @all_ratings
-    elsif params[:ratings]
+    if params[:ratings]
       params[:ratings].keys
     elsif session[:ratings]
       session[:ratings]
+    else
+      @all_ratings
     end
   end
 
