@@ -23,13 +23,11 @@ class MoviesController < ApplicationController
     if params[:sort_by]
       session[:sort_by] = params[:sort_by]
     end
-    @movies = Movie.all.order(session[:sort_by])
+    @movies = Movie.all.where(:rating => session[:ratings]).order(session[:sort_by])
    if session[:sort_by] == 'title'
       @title_header = 'hilite'
     elsif session[:sort_by] == 'release_date'
       @release_header ='hilite'
-    else
-      @movies = Movie.where(:rating => session[:ratings])
    end
   end
 
