@@ -62,8 +62,8 @@ class MoviesController < ApplicationController
   def check
     if params[:ratings]
       params[:ratings].keys
-    # elsif session[:ratings]
-    #   session[:ratings]
+    elsif session[:ratings]
+      session[:ratings]
     else
       @all_ratings
     end
